@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "Eventora-MERN-main/client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    },
+    {
+      "src": "Eventora-MERN-main/server/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "Eventora-MERN-main/server/server.js"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "Eventora-MERN-main/client/assets/$1"
+    },
+    {
+      "src": "/(.*\\.(?:js|css|png|jpg|jpeg|gif|svg|ico|json|woff|woff2|txt))",
+      "dest": "Eventora-MERN-main/client/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "Eventora-MERN-main/client/index.html"
+    }
+  ]
+}

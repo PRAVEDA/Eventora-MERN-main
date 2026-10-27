@@ -1,0 +1,19 @@
+{
+  "name": "eventora-workspace-root",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Eventora root workspace wrapper",
+  "scripts": {
+    "dev": "npm run dev --prefix Eventora-MERN-main",
+    "dev:server": "npm run dev:server --prefix Eventora-MERN-main",
+    "dev:client": "npm run dev:client --prefix Eventora-MERN-main",
+    "build": "npm run build --prefix Eventora-MERN-main",
+    "build:prod": "npm run build:prod --prefix Eventora-MERN-main",
+    "start": "npm run start --prefix Eventora-MERN-main",
+    "start:prod": "npm run start:prod --prefix Eventora-MERN-main",
+    "seed": "npm run seed --prefix Eventora-MERN-main/server",
+    "setup": "npm run setup --prefix Eventora-MERN-main",
+    "install:all": "npm run install:all --prefix Eventora-MERN-main"
+  }
+}
+
