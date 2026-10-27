@@ -119,22 +119,20 @@ async function connectDB() {
 
 // Middleware to ensure DB connection before processing API routes (Crucial for Vercel Serverless)
 app.use(async (req, res, next) => {
-    if (req.originalUrl.startsWith('/api')) {
-        try {
-            await connectDB();
-        } catch (err) {
-            console.error('Database connection error in request handler:', err.message);
-            return res.status(500).json({
-                success: false,
-                message: 'Database connection failed. Please ensure MongoDB Atlas credentials are valid and IP access is open.'
-            });
-        }
+    try {
+        await connectDB();
+    } catch (err) {
+        console.error('Database connection error in request handler:', err.message);
+        return res.status(500).json({
+            success: false,
+            message: 'Database connection failed. Please ensure MongoDB Atlas credentials are valid and IP access is open.'
+        });
     }
     next();
 });
 
 // Health Check Endpoint
-app.get('/api/health', (req, res) => {
+app.get(['/api/health', '/health'], (req, res) => {
     res.json({
         status: 'ok',
         uptime: Math.floor(process.uptime()),
@@ -143,10 +141,10 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// API Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/events', eventRoutes);
-app.use('/api/bookings', bookingRoutes);
+// API Routes (mounted under both /api and root prefixes for compatibility with all rewrite styles)
+app.use(['/api/auth', '/auth'], authRoutes);
+app.use(['/api/events', '/events'], eventRoutes);
+app.use(['/api/bookings', '/bookings'], bookingRoutes);
 
 // Serve static client assets in production if client build exists
 const clientDistPath = path.join(__dirname, '../client/dist');

@@ -1,34 +1,27 @@
 {
-  "version": 2,
-  "builds": [
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "client": {
+      "root": "Eventora-MERN-main/client",
+      "framework": "vite"
+    },
+    "server": {
+      "root": "Eventora-MERN-main/server",
+      "framework": "express"
+    }
+  },
+  "rewrites": [
     {
-      "src": "Eventora-MERN-main/client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "server"
       }
     },
     {
-      "src": "Eventora-MERN-main/server/server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "Eventora-MERN-main/server/server.js"
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "Eventora-MERN-main/client/assets/$1"
-    },
-    {
-      "src": "/(.*\\.(?:js|css|png|jpg|jpeg|gif|svg|ico|json|woff|woff2|txt))",
-      "dest": "Eventora-MERN-main/client/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "Eventora-MERN-main/client/index.html"
+      "source": "/(.*)",
+      "destination": {
+        "service": "client"
+      }
     }
   ]
 }
