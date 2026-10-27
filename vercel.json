@@ -4,12 +4,12 @@
     "client": {
       "root": "Eventora-MERN-main/client",
       "framework": "vite",
-      "installCommand": "npm install --legacy-peer-deps"
+      "installCommand": "npm install --include=dev --legacy-peer-deps"
     },
     "server": {
       "root": "Eventora-MERN-main/server",
       "framework": "express",
-      "installCommand": "npm install --legacy-peer-deps"
+      "installCommand": "npm install --include=dev --legacy-peer-deps"
     }
   },
   "rewrites": [
